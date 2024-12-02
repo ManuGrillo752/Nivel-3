@@ -17,21 +17,24 @@ yargs.command({
     },
     handler: function(argv){
         notesControllers.createNote(argv.title, argv.body)
+        console.log('Nota agregada!')
         
     }
 })
 yargs.command({
     command: 'remove',
     describe: 'remove a not',
-    builder: {
+    builder: {  
         title: {
             describe: 'Note title',
             demandOption: true,
             type: 'string'
         }
     },
-    handler: function(){
+    handler: function(argv){
+        notesControllers.removeNote(argv.title)
         console.log("La nota ha sido removida")
+        
     }
 })
 yargs.command({
@@ -44,7 +47,8 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: function(){
+    handler: function(argv){
+        notesControllers.readNote(argv.title)
         console.log('Nota leida')
     }
 })
@@ -53,6 +57,7 @@ yargs.command({
     describe: 'list a note',
     handler: function(){
         console.log('Nota enlistada')
+        notesControllers.listNotes()
 
     }
 })
